@@ -16,6 +16,7 @@ DROP TABLE IF EXISTS Movies;
 
 CREATE TABLE Movies (
   MovieId BigInt AUTO_INCREMENT,
+  Name VARCHAR(255),
   Year INT,
   ImageUrl VARCHAR(255),
   Rating DECIMAL,
