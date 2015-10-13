@@ -19,7 +19,7 @@ CREATE TABLE Movies (
   Name VARCHAR(255),
   Year INT,
   ImageUrl VARCHAR(255),
-  Rating DECIMAL,
+  Rating DECIMAL(2,1),
   Description VARCHAR(255),
   CONSTRAINT pk_Movies_MovieId PRIMARY KEY (MovieId)
 );
@@ -28,7 +28,7 @@ CREATE TABLE Directors (
   DirectorId Int AUTO_INCREMENT,
   FirstName VARCHAR(255),
   LastName VARCHAR(255),
-  DoB DATE NOT NULL, 
+  DoB DATE, 
   Profile VARCHAR(255),
   Gender VARCHAR(255),
   CONSTRAINT pk_Directors_DirectorId PRIMARY KEY (DirectorId)
@@ -64,7 +64,8 @@ CREATE TABLE GenreTypes (
   GenreType ENUM('Action', 'Adult', 'Adventure', 'Animation',
   'Comedy', 'Crime', 'Documentary', 'Drama', 'Family', 'Fantasy',
   'Film-Noir', 'Horror', 'Music', 'Musical', 'Mystery', 
-  'Romance', 'Sci-Fi', 'Short', 'Thriller', 'War', 'Western') UNIQUE,
+  'Romance', 'Sci-Fi', 'Short', 'Thriller', 'War', 'Western', 
+  'Biography', 'History') UNIQUE,
   CONSTRAINT pk_GenreTypes_GenreId PRIMARY KEY (GenreId)
 );
 
@@ -72,7 +73,8 @@ INSERT INTO GenreTypes(GenreType)
 VALUES('Action'), ('Adult'), ('Adventure'), ('Animation'),
   ('Comedy'), ('Crime'), ('Documentary'), ('Drama'), ('Family'), ('Fantasy'),
   ('Film-Noir'), ('Horror'), ('Music'), ('Musical'), ('Mystery'), 
-  ('Romance'), ('Sci-Fi'), ('Short'), ('Thriller'), ('War'), ('Western');
+  ('Romance'), ('Sci-Fi'), ('Short'), ('Thriller'), ('War'), ('Western'), 
+  ('Biography'), ('History');
 
 CREATE TABLE MovieGenres (
   MovieGenreId BigInt AUTO_INCREMENT,
