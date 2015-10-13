@@ -1,8 +1,6 @@
 CREATE SCHEMA IF NOT EXISTS MovieDB;
 Use MovieDB;
 
-
-
 DROP TABLE IF EXISTS FavoriteMovies;
 DROP TABLE IF EXISTS FavoriteDirectors;
 DROP TABLE IF EXISTS FavoriteActors;
@@ -16,12 +14,12 @@ DROP TABLE IF EXISTS Actors;
 DROP TABLE IF EXISTS Directors;
 DROP TABLE IF EXISTS Movies;
 
-
-
 CREATE TABLE Movies (
   MovieId BigInt AUTO_INCREMENT,
-  FirstName VARCHAR(255),
-  LastName VARCHAR(255),
+  Year INT,
+  ImageUrl VARCHAR(255),
+  Rating DECIMAL,
+  Description VARCHAR(255),
   CONSTRAINT pk_Movies_MovieId PRIMARY KEY (MovieId)
 );
 
@@ -35,7 +33,6 @@ CREATE TABLE Directors (
   CONSTRAINT pk_Directors_DirectorId PRIMARY KEY (DirectorId)
 );
 
-
 CREATE TABLE Actors (
   ActorId Int AUTO_INCREMENT,
   Height Int,
@@ -48,10 +45,9 @@ CREATE TABLE Actors (
   CONSTRAINT pk_Actors_ActorId PRIMARY KEY (ActorId)
 );
 
-
 CREATE TABLE Users (
   UserId BigInt AUTO_INCREMENT,
-  UserName VARCHAR(255), #should UserName be the unique identifier?
+  UserName VARCHAR(255) UNIQUE,
   Password VARCHAR(255),
   Email VARCHAR(255),
   FirstName VARCHAR(255),
@@ -64,12 +60,18 @@ CREATE TABLE Users (
 
 CREATE TABLE GenreTypes (
   GenreId INT AUTO_INCREMENT,
-  GenreType ENUM('Action', 'Adult', 'Adventure"', 'Animation',
+  GenreType ENUM('Action', 'Adult', 'Adventure', 'Animation',
   'Comedy', 'Crime', 'Documentary', 'Drama', 'Family', 'Fantasy',
   'Film-Noir', 'Horror', 'Music', 'Musical', 'Mystery', 
-  'Romance', 'Sci-Fi', 'Short', 'Thriller', 'War', 'Western'),
+  'Romance', 'Sci-Fi', 'Short', 'Thriller', 'War', 'Western') UNIQUE,
   CONSTRAINT pk_GenreTypes_GenreId PRIMARY KEY (GenreId)
 );
+
+INSERT INTO GenreTypes(GenreType)
+VALUES('Action'), ('Adult'), ('Adventure'), ('Animation'),
+  ('Comedy'), ('Crime'), ('Documentary'), ('Drama'), ('Family'), ('Fantasy'),
+  ('Film-Noir'), ('Horror'), ('Music'), ('Musical'), ('Mystery'), 
+  ('Romance'), ('Sci-Fi'), ('Short'), ('Thriller'), ('War'), ('Western');
 
 CREATE TABLE MovieGenres (
   MovieGenreId BigInt AUTO_INCREMENT,
@@ -102,7 +104,6 @@ CREATE TABLE FavoriteDirectors (
     ON UPDATE CASCADE ON DELETE CASCADE
 );
 
-
 CREATE TABLE DirectedMovies (
   DirectedMovieId INT AUTO_INCREMENT,
   DirectorId INT,
@@ -133,7 +134,6 @@ CREATE TABLE PerformedMovies (
     ON UPDATE CASCADE ON DELETE CASCADE
 );
 
-
 CREATE TABLE FavoriteMovies (
   FavoriteMovieId BIGINT AUTO_INCREMENT,
   UserId BIGINT,
@@ -150,10 +150,6 @@ CREATE TABLE FavoriteMovies (
     ON UPDATE CASCADE ON DELETE CASCADE
 );
 
-
-
-
-
 CREATE TABLE FavoriteActors (
   FavoriteActorId BIGINT AUTO_INCREMENT,
   UserId BIGINT,
@@ -168,7 +164,6 @@ CREATE TABLE FavoriteActors (
     REFERENCES Actors(ActorId)
     ON UPDATE CASCADE ON DELETE CASCADE
 );
-
 
 CREATE TABLE FavoriteGenres (
   FavoriteGenreId BIGINT AUTO_INCREMENT,
