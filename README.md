@@ -1,5 +1,8 @@
 # Movie Projecet
 
+DbCreationSQLsql.sql
+- Table creation SQL for MovieDB
+
 craw.py
 - The crawler script for scraping data on IMDB web pages.
 
