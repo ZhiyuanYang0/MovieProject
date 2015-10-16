@@ -6,10 +6,10 @@ genre_type_dict = {'Action': 1, 'Adult': 2, 'Adventure': 3, 'Animation': 4, 'Com
                    'Romance': 16, 'Sci-Fi': 17, 'Short': 18, 'Thriller': 19, 'War': 20, 'Western': 21,
                    'Biography': 22, 'History': 23};
 
-con_movie = mysql.connector.connect(user='sam', password='********',
+con_movie = mysql.connector.connect(user='heng', password='33333333',
                                     host='moviedb.cb47kibm2dah.us-west-2.rds.amazonaws.com',
                                     database='Movie')
-con_movieDB = mysql.connector.connect(user='sam', password='********',
+con_movieDB = mysql.connector.connect(user='heng', password='33333333',
                                       host='moviedb.cb47kibm2dah.us-west-2.rds.amazonaws.com',
                                       database='MovieDB')
 cursor_movie = con_movie.cursor()
@@ -132,7 +132,7 @@ def insert_MovieGenres(movie_id, genre_id):
     return cursor_movieDB.lastrowid
 
 
-query_get_all = "SELECT * FROM MovieInfo ORDER BY Id"
+query_get_all = "SELECT * FROM MovieInfo ORDER BY Id LIMIT 50000 OFFSET 45792"
 cursor_movie.execute(query_get_all)
 record = fetch_one_assoc(cursor_movie)
 
